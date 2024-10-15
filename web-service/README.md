@@ -36,6 +36,7 @@ Add your environment folder, and `/app/__pycache__/` to the project .gitignore f
 ```
 uvicorn app.main:app --reload
 ```
+In this example, app is the folder, main is the filename, and app is used inside main.py.
 
 ### Explore the documentation of your web service
 Visit [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) in your browser to see the automatically generated API documentation from FastAPI. You will be able to test the two endpoints (/send_message/ and /conversation_history/) directly from the browser.

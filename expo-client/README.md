@@ -6,34 +6,35 @@ This project uses expo-router based navigation. [Link]
 This should have been handled by the Windows or Linux installation scripts in project ai-chat-app.
 
 ### Create an empty example app
-Useful if you want to start from the very beginning:  
+Useful if you want to start from a blank state:  
 ```
 npx create-expo-app@latest expo-example-app 
 ```
 
 ## Run the app
-
-### Install Expo Go app on your phone (Android/IPhone) if you don't have it
+### Install Expo Go app on your phone (Android/IPhone)
 [https://expo.dev/go](https://expo.dev/go)  
 Or install directly:  
 * [Play Store App](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en)
 * [App Store App](https://apps.apple.com/us/app/expo-go/id982107779)
+
+### Install/update dependencies if needed
+Navigate to project directory in CMD/terminal.
+```
+npm install
+npm update
+```
 
 ### Verify the state of the project
 ```
 npx expo-doctor
 ```
 
-### Update dependencies if needed
-```
-npm update
-```
-
 ### Environments
 You do not have to use poetry/vu/venv/etc. to manage environment and dependencies (like you have to in Python projects), node installs everything in a local project specific environment by default.  
 
 ## Update config.json to add URL of your web-service
-You an use [ngrok](ngrok.com) for making your locally hosted web-service available on the internet.  
+You Can use [ngrok](ngrok.com) for making your locally hosted web-service available on the internet.  
 Instructions are in `/web-service/README.md`
 
 ### Start the app
