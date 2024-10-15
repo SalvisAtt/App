@@ -130,10 +130,6 @@ cd tkinter-client
 create_venv "$TKINTER_CLIENT_VENV_NAME"
 cd ..
 
-cd expo-client
-create_venv "$EXPO_CLIENT_VENV_NAME"
-cd ..
-
 # Step 7: Install sub-project dependencies
 echo "STEP 7: Installing sub-project dependencies..."
 
