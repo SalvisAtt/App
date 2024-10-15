@@ -22,7 +22,7 @@ async def process_message_and_respond(thread_id: str, message: str):
         dict: A dictionary containing the thread ID, the assistant's test response, and the original message.
     """
 
-    # Currentlty returns dummy data.
+    # Currently returns dummy data.
     # Goal: your actual method should add the user message to the conversation history,
     # and also return a response from the assistant
     return {

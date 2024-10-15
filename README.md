@@ -58,8 +58,11 @@ source your-new-env/bin/activate
 pip install -r requirements.txt
 ```
 8. Start the project (refer to instructions from the sub-project readme file)\
+expo-client/README.md
+tkinter-client/README.md
+web-service-client/README.md
 
-10. Add your repository as a remote, and commit your changes there
+9. Add your repository as a remote, and commit your changes there
 Useful commands
 ```
 git remote -v                                                                 # View existing remotes

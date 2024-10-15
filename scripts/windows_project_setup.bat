@@ -112,6 +112,11 @@ set LOG_FILE=logs\setup_log_%timestamp%.txt
         echo Skipping global GitHub credentials setup. Ensure you have configured authentication via SSH or other methods.
     )
 
+    :: Unset GitHub credential variables
+    set GITHUB_USERNAME=
+    set GITHUB_EMAIL=
+    set GITHUB_PASSWORD=
+
     :: Step 6: Create the virtual environments
     echo Step 6: Creating virtual environments...
     echo   for web-service, it is called: %WEB_SERVICE_VENV_NAME%
@@ -132,14 +137,7 @@ set LOG_FILE=logs\setup_log_%timestamp%.txt
     )
     cd ..
 
-    echo   for expo-client, it is called: %EXPO_CLIENT_VENV_NAME%
-    cd expo-client
-    if not exist %EXPO_CLIENT_VENV_NAME% (
-        %PYTHON_CMD% -m venv %EXPO_CLIENT_VENV_NAME%
-    ) else (
-        echo Virtual environment %EXPO_CLIENT_VENV_NAME% already exists. Not overwriting...
-    )
-    cd ..
+    :: For expo apps, dependencies are installed by node in a local environment by default
 
     :: Step 7: Install sub-project dependencies
     echo STEP 7: Installing sub-project dependencies...
@@ -158,14 +156,8 @@ set LOG_FILE=logs\setup_log_%timestamp%.txt
 
     echo   for expo-client...
     cd expo-client
-    call %EXPO_CLIENT_VENV_NAME%\Scripts\activate
-    pip install -r requirements.txt
+    npm install
     cd ..
-
-    :: Unset GitHub credential variables
-    set GITHUB_USERNAME=
-    set GITHUB_EMAIL=
-    set GITHUB_PASSWORD=
 
     :: Pause for review
     pause

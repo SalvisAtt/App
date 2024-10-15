@@ -1,17 +1,3 @@
-# Expo client app
-node_modules/
-.expo/
-
-# Python tkinter app
-/tkinter-client/tkinter-client-env/
-/tkinter-client/chat/
-/tkinter-client/app/__pycache__/
-
-# FastAPI web service
-/web-service/web-service-env/
-/web-service/venv/
-/web-service/app/__pycache__/
-
 # misc
 # file draft backup on Linux
 *.md~
