@@ -51,6 +51,30 @@ fi
 
 echo "Using Python command: $PYTHON_CMD"
 
+# Step 2.1: Check if Node.js is installed
+echo "Step 2.1: Checking if Node.js is installed..."
+if ! command -v node &> /dev/null
+then
+    echo "Node.js is not installed."
+    echo "Please install Node.js and run this script again."
+    exit 1
+else
+    node_version=$(node --version)
+    echo "Node.js version: $node_version"
+fi
+
+# Step 2.2: Check if npm is installed
+echo "Step 2.2: Checking if npm is installed..."
+if ! command -v npm &> /dev/null
+then
+    echo "npm is not installed."
+    echo "Please install npm and run this script again."
+    exit 1
+else
+    npm_version=$(npm --version)
+    echo "npm version: $npm_version"
+fi
+
 # Step 3: Clone the repository
 echo "Step 3: Cloning the GitHub repository..."
 if ! git clone "$GITHUB_REPO"; then
@@ -130,7 +154,7 @@ install_dependencies "$TKINTER_CLIENT_VENV_NAME"
 cd ..
 
 cd expo-client
-install_dependencies "$EXPO_CLIENT_VENV_NAME"
+npm install
 cd ..
 
 # Unset GitHub credential variables

@@ -73,6 +73,32 @@ set LOG_FILE=logs\setup_log_%timestamp%.txt
 
     echo Using Python command: %PYTHON_CMD%
 
+    :: Step 2.1 Check if Node is installed
+    echo Step 2.1: Checking if Node.js is installed...
+    node --version >nul 2>&1
+    IF %ERRORLEVEL% NEQ 0 (
+        echo Node.js is not installed. 
+        echo Please install Node.js and run this script again.
+        pause
+        exit /b 1
+    ) ELSE (
+        FOR /f "delims=" %%i IN ('node --version') DO SET node_version=%%i
+        echo Node.js version: %node_version%
+    )
+
+    :: Step 2.2 Check if npm is installed
+    echo Step 2.2: Checking if npm is installed...
+    npm --version >nul 2>&1
+    IF %ERRORLEVEL% NEQ 0 (
+        echo npm is not installed.
+        echo Please install npm and run this script again.
+        pause
+        exit /b 1
+    ) ELSE (
+        FOR /f "delims=" %%i IN ('npm --version') DO SET npm_version=%%i
+        echo npm version: %npm_version%
+    )
+
     :: Step 3: Clone the source repository
     echo Step 3: Cloning the GitHub repository...
     git clone %GITHUB_REPO%
