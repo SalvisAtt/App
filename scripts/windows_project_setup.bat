@@ -3,9 +3,10 @@
 :: Define variables for easy configuration
 set WEB_SERVICE_VENV_NAME=web-service-env
 set TKINTER_CLIENT_VENV_NAME=tkinter-client-env
-set EXPO_CLIENT_VENV_NAME=expo-client-env
 set PROJECT_NAME=ai-chat-app
 set GITHUB_REPO=https://github.com/ingus-t/ai-chat-app.git
+
+:: change this to match your own repository on GitHub
 set ORIGIN_REPO=git@github.com:your-username/your-repository.git
 
 :: Get the current timestamp in a format suitable for file names: YYYY-MM-DD_HH-MM-SS
@@ -20,21 +21,20 @@ set LOG_FILE=logs\setup_log_%timestamp%.txt
 :: Redirect all output (stdout and stderr) to the log file
 (
 
-    :: Create a logs folder if it doesn't exist
-    echo Step 0: checking logs folder
+    :: Steps 0: Create a logs folder if it doesn't exist
+    echo =========\nSteps 0: checking logs folder\n=========
     if not exist logs (
         mkdir logs
-        echo created a logs folder...
+        echo created a logs folder
     ) else (
-        echo logs folder already exists...
+        echo logs folder already exists
     )
 
-    :: Step 1: Check if Git is installed
-    echo Step 1: Checking if Git is installed...
+    :: Steps 1: Check if Git is installed
+    echo =========\nSteps 1: Checking if Git is installed\n=========
     git --version >nul 2>&1
     if %ERRORLEVEL% neq 0 (
-        echo Git is not installed. Downloading Git...
-        start https://git-scm.com/download/win
+        echo Git is not installed.
         echo Please install Git and run this script again.
         pause
         exit /b 1
@@ -42,8 +42,8 @@ set LOG_FILE=logs\setup_log_%timestamp%.txt
         echo Git is installed.
     )
 
-    :: Step 2: Check if Python is installed
-    echo Step 2: Checking if Python is installed...
+    :: Steps 2: Check if Python is installed
+    echo =========\nSteps 2: Checking if Python is installed\n=========
     python --version >nul 2>&1
 
     python -c "import sys; assert sys.version_info.major >= 3"
@@ -53,11 +53,10 @@ set LOG_FILE=logs\setup_log_%timestamp%.txt
     )
 
     if %ERRORLEVEL% neq 0 (
-        echo "python" command not found, checking for "python3"...
+        echo "python" command not found, checking for "python3"\n=========
         python3 --version >nul 2>&1
         if %ERRORLEVEL% neq 0 (
-            echo Python is not installed. Downloading Python...
-            start https://www.python.org/downloads/
+            echo Python is not installed.
             echo Please install Python and run this script again.
             pause
             exit /b 1
@@ -73,8 +72,8 @@ set LOG_FILE=logs\setup_log_%timestamp%.txt
 
     echo Using Python command: %PYTHON_CMD%
 
-    :: Step 2.1 Check if Node is installed
-    echo Step 2.1: Checking if Node.js is installed...
+    :: Steps 3 Check if Node is installed
+    echo =========\nSteps 3: Checking if Node.js is installed\n=========
     node --version >nul 2>&1
     IF %ERRORLEVEL% NEQ 0 (
         echo Node.js is not installed. 
@@ -86,8 +85,8 @@ set LOG_FILE=logs\setup_log_%timestamp%.txt
         echo Node.js version: %node_version%
     )
 
-    :: Step 2.2 Check if npm is installed
-    echo Step 2.2: Checking if npm is installed...
+    :: Steps 4 Check if npm is installed
+    echo =========\nSteps 4: Checking if npm is installed\n=========
     npm --version >nul 2>&1
     IF %ERRORLEVEL% NEQ 0 (
         echo npm is not installed.
@@ -99,8 +98,8 @@ set LOG_FILE=logs\setup_log_%timestamp%.txt
         echo npm version: %npm_version%
     )
 
-    :: Step 3: Clone the source repository
-    echo Step 3: Cloning the GitHub repository...
+    :: Steps 5: Clone the source repository
+    echo =========\nSteps 5: Cloning the GitHub repository\n=========
     git clone %GITHUB_REPO%
     cd %PROJECT_NAME%
 
@@ -109,15 +108,16 @@ set LOG_FILE=logs\setup_log_%timestamp%.txt
         exit /b 1
     )
 
-    :: Step 4: Set student's GitHub repository as origin
-    echo Step 4: Setting your own repository as the origin...
+    :: Steps 6: Set student's GitHub repository as origin
+    echo =========\nSteps 6: Setting your own repository as the origin\n=========
     git remote add origin %ORIGIN_REPO%
     git remote -v
 
-    :: Step 5: GitHub global credential configuration
+    :: Steps 7: GitHub global credential configuration
     :: Ask user if they want to save GitHub credentials globally
-    echo Step 5: GitHub credentials
+    echo =========\nSteps 7: GitHub credentials
     echo Do you want to save your GitHub credentials globally? (y/n)
+    echo You should only do this on your personal computer, or make sure to delete these credentials when you are done.
     set /p SAVE_GLOBAL=Enter y for Yes or n for No: 
 
     if /i "%SAVE_GLOBAL%"=="y" (
@@ -135,7 +135,7 @@ set LOG_FILE=logs\setup_log_%timestamp%.txt
 
         echo GitHub credentials have been configured globally.
     ) else (
-        echo Skipping global GitHub credentials setup. Ensure you have configured authentication via SSH or other methods.
+        echo Skipping global GitHub credentials setup. Ensure you have configured authentication via SSH or other methods. You must be able to commit to your own repository.
     )
 
     :: Unset GitHub credential variables
@@ -143,44 +143,44 @@ set LOG_FILE=logs\setup_log_%timestamp%.txt
     set GITHUB_EMAIL=
     set GITHUB_PASSWORD=
 
-    :: Step 6: Create the virtual environments
-    echo Step 6: Creating virtual environments...
+    :: Steps 8: Create the virtual environments
+    echo =========\nSteps 8: Creating virtual environments\n=========
     echo   for web-service, it is called: %WEB_SERVICE_VENV_NAME%
     cd web-service
     if not exist %WEB_SERVICE_VENV_NAME% (
         %PYTHON_CMD% -m venv %WEB_SERVICE_VENV_NAME%
     ) else (
-        echo Virtual environment %WEB_SERVICE_VENV_NAME% already exists. Not overwriting...
+        echo Virtual environment %WEB_SERVICE_VENV_NAME% already exists. Not overwriting\n=========
     )
     cd ..
 
-    echo   for tkinter-client, it is called: %TKINTER_CLIENT_VENV_NAME%
+    echo for tkinter-client, it is called: %TKINTER_CLIENT_VENV_NAME%
     cd tkinter-client
     if not exist %TKINTER_CLIENT_VENV_NAME% (
         %PYTHON_CMD% -m venv %TKINTER_CLIENT_VENV_NAME%
     ) else (
-        echo Virtual environment %TKINTER_CLIENT_VENV_NAME% already exists. Not overwriting...
+        echo Virtual environment %TKINTER_CLIENT_VENV_NAME% already exists. Not overwriting\n=========
     )
     cd ..
 
     :: For expo apps, dependencies are installed by node in a local environment by default
 
-    :: Step 7: Install sub-project dependencies
-    echo STEP 7: Installing sub-project dependencies...
+    :: Steps 9: Install sub-project dependencies
+    echo =========\nSteps 9: Installing sub-project dependencies\n=========
 
-    echo   for web-service...
+    echo   for web-service
     cd web-service
     call %WEB_SERVICE_VENV_NAME%\Scripts\activate
     pip install -r requirements.txt
     cd ..
 
-    echo   for tkinter-client...
+    echo   for tkinter-client
     cd tkinter-client
     call %TKINTER_CLIENT_VENV_NAME%\Scripts\activate
     pip install -r requirements.txt
     cd ..
 
-    echo   for expo-client...
+    echo   for expo-client
     cd expo-client
     npm install
     cd ..
