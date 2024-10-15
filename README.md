@@ -14,16 +14,29 @@ project_folder/
 
 ## Project setup
 ### Option 1: Locally on Windows
-Execute the script `scripts/windows-project-setup.bat`. You should run it in administrator mode.
+Download the setup file `windows_project_setup.bat` from /scripts/ folder, and put it in the directory where you want the GitHub repo to be cloned.  
+
+Change the value of ORIGIN_REPO at the start of the file, to your own repository.  
+
+Execute the script `windows_project_setup.bat`. You should run it in administrator mode.
 To run it, double-click on the file, or navigate to the project folder in the terminal and run:
 ```
-scripts/windows-project-setup.bat
+windows_project_setup.bat
 ```
 
 ### Option 2: Locally on Linux
-Execute the script `./linux-project-setup.bat.sh`
+Download the setup file  `linux_project_setup.sh` from /scripts/ folder, and put it in the directory where you want the GitHub repo to be cloned.  
+
+Change the value of ORIGIN_REPO at the start of the file, to your own repository.  
+
+Make the script executable
 ```
-.scripts/linux-project-setup.bat.sh
+chmod +x linux_project_setup.sh
+```
+
+Execute the script:
+```
+./linux_project_setup.bat.sh
 ```
 
 ### Option 3: replit.com platform
